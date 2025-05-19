@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Joc de Zaruri</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        .container {
+            background-image: url('ewfgwergerewegtattttt46qe6.JPG');
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            background-position: center;
+            display: inline-block;
+            margin: 1rem;
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 0.4rem 1.6rem rgba(0, 0, 0, 0.15);
+            box-sizing: border-box;
+        }
+
+        h1 {
+            font-size: 1.6rem;
+            margin: 0.5rem 0;
+            color: #333;
+        }
+
+        .language-buttons {
+            margin: 0.5rem 0;
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .language-buttons button {
+            padding: 0.6rem 1rem;
+            font-size:1rem;
+            border: none;
+            border-radius: 0.5rem;
+            background-color: #e0e0e0;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            touch-action: manipulation;
+        }
+
+        .language-buttons button:active {
+            background-color: #d0d0d0;
+        }
+
+        .balance {
+            font-size: 1.2rem;
+            margin: 1rem 0;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .dice-container {
+            height: 8rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .dice {
+            width: 5rem;
+            height: 5rem;
+            display: none;
+            border: 0.2rem solid #333;
+            border-radius: 0.5rem;
+            position: relative;
+            background-color: white;
+        }
+
+        .dot {
+            width: 0.9rem;
+            height: 0.9rem;
+            background-color: #333;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        /* Dot positions for each dice face */
+        .dice-1 .dot-1 { top: 2rem; left: 2rem; }
+        .dice-2 .dot-1 { top: 0.8rem; left: 0.8rem; }
+        .dice-2 .dot-2 { bottom: 0.8rem; right: 0.8rem; }
+        .dice-3 .dot-1 { top: 0.8rem; left: 0.8rem; }
+        .dice-3 .dot-2 { top: 2rem; left: 2rem; }
+        .dice-3 .dot-3 { bottom: 0.8rem; right: 0.8rem; }
+        .dice-4 .dot-1 { top: 0.8rem; left: 0.8rem; }
+        .dice-4 .dot-2 { top: 0.8rem; right: 0.8rem; }
+        .dice-4 .dot-3 { bottom: 0.8rem; left: 0.8rem; }
+        .dice-4 .dot-4 { bottom: 0.8rem; right: 0.8rem; }
+        .dice-5 .dot-1 { top: 0.8rem; left: 0.8rem; }
+        .dice-5 .dot-2 { top: 0.8rem; right: 0.8rem; }
+        .dice-5 .dot-3 { bottom: 0.8rem; left: 0.8rem; }
+        .dice-5 .dot-4 { bottom: 0.8rem; right: 0.8rem; }
+        .dice-5 .dot-5 { top: 2rem; left: 2rem; }
+        .dice-6 .dot-1 { top: 0.8rem; left: 0.8rem; }
+        .dice-6 .dot-2 { top: 2rem; left: 0.8rem; }
+        .dice-6 .dot-3 { bottom: 0.8rem; left: 0.8rem; }
+        .dice-6 .dot-4 { top: 0.8rem; right: 0.8rem; }
+        .dice-6 .dot-5 { top: 2rem; right: 0.8rem; }
+        .dice-6 .dot-6 { bottom: 0.8rem; right: 0.8rem; }
+
+        .controls {
+            margin: 1rem 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .controls label {
+            margin: 0 0.5rem;
+            font-size: 1rem;
+        }
+
+        input[type="radio"] {
+            transform: scale(1.5);
+            margin: 0.5rem;
+        }
+
+        input[type="text"] {
+            padding: 0.8rem;
+            width: 6rem;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 0.5rem;
+            text-align: center;
+            margin: 0.5rem;
+        }
+
+        button {
+            padding: 0.8rem 1.5rem;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            touch-action: manipulation;
+        }
+
+        button:active {
+            background-color: #45a049;
+        }
+
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        .result {
+            margin: 1rem 0;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        /* Responsivitate pentru mobil */
+        @media (max-width: 600px) {
+            .container {
+                margin: 0.5rem;
+                padding: 1rem;
+                width: calc(100% - 2rem); /* Ocupă aproape tot ecranul */
+            }
+
+            h1 {
+                font-size: 1.4rem;
+            }
+
+            .language-buttons button {
+                padding: 0.5rem 0.8rem;
+                font-size: 0.9rem;
+            }
+
+            .balance {
+                font-size: 1.1rem;
+            }
+
+            .dice-container {
+                height: 6rem;
+            }
+
+            .dice {
+                width: 4rem;
+                height: 4rem;
+            }
+
+            .dot {
+                width: 0.7rem;
+                height: 0.7rem;
+            }
+
+            .dice-1 .dot-1 { top: 1.6rem; left: 1.6rem; }
+            .dice-2 .dot-1 { top: 0.6rem; left: 0.6rem; }
+            .dice-2 .dot-2 { bottom: 0.6rem; right: 0.6rem; }
+            .dice-3 .dot-1 { top: 0.6rem; left: 0.6rem; }
+            .dice-3 .dot-2 { top: 1.6rem; left: 1.6rem; }
+            .dice-3 .dot-3 { bottom: 0.6rem; right: 0.6rem; }
+            .dice-4 .dot-1 { top: 0.6rem; left: 0.6rem; }
+            .dice-4 .dot-2 { top: 0.6rem; right: 0.6rem; }
+            .dice-4 .dot-3 { bottom: 0.6rem; left: 0.6rem; }
+            .dice-4 .dot-4 { bottom: 0.6rem; right: 0.6rem; }
+            .dice-5 .dot-1 { top: 0.6rem; left: 0.6rem; }
+            .dice-5 .dot-2 { top: 0.6rem; right: 0.6rem; }
+            .dice-5 .dot-3 { bottom: 0.6rem; left: 0.6rem; }
+            .dice-5 .dot-4 { bottom: 0.6rem; right: 0.6rem; }
+            .dice-5 .dot-5 { top: 1.6rem; left: 1.6rem; }
+            .dice-6 .dot-1 { top: 0.6rem; left: 0.6rem; }
+            .dice-6 .dot-2 { top: 1.6rem; left: 0.6rem; }
+            .dice-6 .dot-3 { bottom: 0.6rem; left: 0.6rem; }
+            .dice-6 .dot-4 { top: 0.6rem; right: 0.6rem; }
+            .dice-6 .dot-5 { top: 1.6rem; right: 0.6rem; }
+            .dice-6 .dot-6 { bottom: 0.6rem; right: 0.6rem; }
+
+            input[type="text"] {
+                width: 5rem;
+                padding: 0.6rem;
+                font-size: 0.9rem;
+            }
+
+            button {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Joc de Zaruri</h1>
+        
+        <div class="language-buttons">
+            <button id="btnRomania">RO</button>
+            <button id="btnEngleza">EN</button>
+            <button id="btnPoloneza">PL</button>
+        </div>
+        
+        <div class="balance" id="balanceLabel">Balanță: 100 lei</div>
+        
+        <div class="dice-container">
+            <div class="dice dice-1" id="dice1">
+                <div class="dot dot-1"></div>
+            </div>
+            <div class="dice dice-2" id="dice2">
+                <div class="dot dot-1"></div>
+                <div class="dot dot-2"></div>
+            </div>
+            <div class="dice dice-3" id="dice3">
+                <div class="dot dot-1"></div>
+                <div class="dot dot-2"></div>
+                <div class="dot dot-3"></div>
+            </div>
+            <div class="dice dice-4" id="dice4">
+                <div class="dot dot-1"></div>
+                <div class="dot dot-2"></div>
+                <div class="dot dot-3"></div>
+                <div class="dot dot-4"></div>
+            </div>
+            <div class="dice dice-5" id="dice5">
+                <div class="dot dot-1"></div>
+                <div class="dot dot-2"></div>
+                <div class="dot dot-3"></div>
+                <div class="dot dot-4"></div>
+                <div class="dot dot-5"></div>
+            </div>
+            <div class="dice dice-6" id="dice6">
+                <div class="dot dot-1"></div>
+                <div class="dot dot-2"></div>
+                <div class="dot dot-3"></div>
+                <div class="dot dot-4"></div>
+                <div class="dot dot-5"></div>
+                <div class="dot dot-6"></div>
+            </div>
+        </div>
+        
+        <div class="controls" id="controls">
+            <div>
+                <input type="radio" id="radioHigh" name="betType" checked>
+                <label for="radioHigh" id="labelHigh">Mai mare decât 3</label>
+                <input type="radio" id="radioLow" name="betType">
+                <label for="radioLow" id="labelLow">Mai mic sau egal cu 3</label>
+            </div>
+            <div>
+                <input type="text" id="betAmount" placeholder="Sumă">
+                <button id="btnStart">Începe</button>
+            </div>
+        </div>
+        
+        <div class="result" id="resultLabel"></div>
+    </div>
+
+    <script>
+        // Configurări joc
+        let balance = 100;
+        let currentLanguage = "RO";
+        let currentCurrency = "lei";
+        let rollingInProgress = false;
+        let diceElements = [
+            document.getElementById('dice1'),
+            document.getElementById('dice2'),
+            document.getElementById('dice3'),
+            document.getElementById('dice4'),
+            document.getElementById('dice5'),
+            document.getElementById('dice6')
+        ];
+        
+        // Traduceri
+        const translations = {
+            RO: {
+                balance: "Balanță",
+                greater: "Mai mare decât 3",
+                lessOrEqual: "Mai mic sau egal cu 3",
+                start: "Începe",
+                win: "Ai câștigat!",
+                lose: "Ai pierdut!",
+                invalidBet: "Pariu invalid!",
+                gameOver: "Ai rămas fără bani! Joc terminat.",
+                validAmount: "Introduceți o sumă validă!"
+            },
+            EN: {
+                balance: "Balance",
+                greater: "Greater than 3",
+                lessOrEqual: "Less than or equal to 3",
+                start: "Start",
+                win: "You won!",
+                lose: "You lost!",
+                invalidBet: "Invalid bet!",
+                gameOver: "You're out of money! Game over.",
+                validAmount: "Enter a valid amount!"
+            },
+            PL: {
+                balance: "Saldo",
+                greater: "Większe niż 3",
+                lessOrEqual: "Mniejsze lub równe 3",
+                start: "Start",
+                win: "Wygrałeś!",
+                lose: "Przegrałeś!",
+                invalidBet: "Nieprawidłowy zakład!",
+                gameOver: "Koniec gry! Brak środków.",
+                validAmount: "Wprowadź prawidłową kwotę!"
+            }
+        };
+        
+        // Setări monedă
+        const currencies = {
+            RO: "lei",
+            EN: "£",
+            PL: "zł"
+        };
+        
+        // Butoane limbă
+        document.getElementById('btnRomania').addEventListener('click', () => setLanguage("RO"));
+        document.getElementById('btnEngleza').addEventListener('click', () => setLanguage("EN"));
+        document.getElementById('btnPoloneza').addEventListener('click', () => setLanguage("PL"));
+        
+        // Setare limbă
+        function setLanguage(lang) {
+            currentLanguage = lang;
+            currentCurrency = currencies[lang];
+            
+            // Actualizează interfața
+            document.getElementById('balanceLabel').textContent = `${translations[lang].balance}: ${balance} ${currentCurrency}`;
+            document.getElementById('labelHigh').textContent = translations[lang].greater;
+            document.getElementById('labelLow').textContent = translations[lang].lessOrEqual;
+            document.getElementById('btnStart').textContent = translations[lang].start;
+            document.getElementById('resultLabel').textContent = "";
+        }
+        
+        // Ascunde/Afișează zarurile
+        function hideAllDice() {
+            diceElements.forEach(dice => {
+                dice.style.display = 'none';
+            });
+        }
+        
+        function showDice(value) {
+            hideAllDice();
+            diceElements[value - 1].style.display = 'block';
+        }
+        
+        // Începere joc
+        document.getElementById('btnStart').addEventListener('click', startGame);
+        
+        function startGame() {
+            if (rollingInProgress) return;
+            
+            const betInput = document.getElementById('betAmount');
+            const bet = parseInt(betInput.value);
+            
+            // Validare pariu
+            if (isNaN(bet) || bet <= 0) {
+                alert(translations[currentLanguage].validAmount);
+                return;
+            }
+            
+            if (bet > balance) {
+                alert(translations[currentLanguage].invalidBet);
+                return;
+            }
+            
+            // Dezactivează controalele în timpul rulării
+            document.getElementById('btnStart').disabled = true;
+            document.getElementById('betAmount').disabled = true;
+            document.getElementById('radioHigh').disabled = true;
+            document.getElementById('radioLow').disabled = true;
+            document.getElementById('btnRomania').disabled = true;
+            document.getElementById('btnEngleza').disabled = true;
+            document.getElementById('btnPoloneza').disabled = true;
+            
+            // Simulare sunet de zaruri
+            const audio = new Audio('https://www.soundjay.com/misc/sounds/dice-roll-02.mp3');
+            audio.play().catch(error => {
+                console.log("Eroare la redarea sunetului:", error);
+            });
+            
+            // Animație zaruri
+            rollingInProgress = true;
+            let rollCount = 0;
+            const rollInterval = setInterval(() => {
+                const randomValue = Math.floor(Math.random() * 6) + 1;
+                showDice(randomValue);
+                
+                rollCount++;
+                if (rollCount >= 10) {
+                    clearInterval(rollInterval);
+                    const finalValue = Math.floor(Math.random() * 6) + 1;
+                    showDice(finalValue);
+                    setTimeout(() => {
+                        checkResult(finalValue, bet);
+                        rollingInProgress = false;
+                        
+                        // Reactivează controalele
+                        document.getElementById('btnStart').disabled = false;
+                        document.getElementById('betAmount').disabled = false;
+                        document.getElementById('radioHigh').disabled = false;
+                        document.getElementById('radioLow').disabled = false;
+                        document.getElementById('btnRomania').disabled = false;
+                        document.getElementById('btnEngleza').disabled = false;
+                        document.getElementById('btnPoloneza').disabled = false;
+                    }, 500);
+                }
+            }, 100);
+        }
+        
+        // Verificare rezultat
+        function checkResult(rolledValue, bet) {
+            const radioHigh = document.getElementById('radioHigh');
+            const resultLabel = document.getElementById('resultLabel');
+            
+            let winCondition = false;
+            
+            if (radioHigh.checked && rolledValue > 3) {
+                winCondition = true;
+            } else if (!radioHigh.checked && rolledValue <= 3) {
+                winCondition = true;
+            }
+            
+            if (winCondition) {
+                balance += bet;
+                resultLabel.textContent = `${translations[currentLanguage].win} +${bet} ${currentCurrency}`;
+                resultLabel.style.color = 'green';
+            } else {
+                balance -= bet;
+                resultLabel.textContent = `${translations[currentLanguage].lose} -${bet} ${currentCurrency}`;
+                resultLabel.style.color = 'red';
+            }
+            
+            // Actualizare balanță
+            document.getElementById('balanceLabel').textContent = `${translations[currentLanguage].balance}: ${balance} ${currentCurrency}`;
+            
+            // Verificare game over
+            if (balance <= 0) {
+                alert(translations[currentLanguage].gameOver);
+                document.getElementById('btnStart').disabled = true;
+            }
+        }
+        
+        // Inițializare
+        hideAllDice();
+    </script>
+</body>
+</html>
