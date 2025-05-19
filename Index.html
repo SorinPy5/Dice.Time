@@ -5,32 +5,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Joc de Zaruri</title>
     <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            text-align: center;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+            overflow-x: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            overscroll-behavior: none;
+            touch-action: manipulation;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             display: flex;
             justify-content: center;
-            align-items: flex-start;
-            min-height: 100vh;
-            box-sizing: border-box;
-            overscroll-behavior: none;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .background-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('ewfgwergerewegtattttt46qe6.JPG') no-repeat center center;
+            background-size: cover;
+            z-index: -1;
+            opacity: 0.3;
         }
 
         .container {
             width: 100%;
             max-width: 450px;
-            margin: 0.8rem;
+            margin: 0 auto;
             padding: 1.5rem;
-            background: rgba(255, 255, 255, 0.9) url('ewfgwergerewegtattttt46qe6.JPG') no-repeat center center;
-            background-size: cover;
+            background: rgba(255, 255, 255, 0.9);
             border-radius: 1.5rem;
             box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
-            box-sizing: border-box;
             animation: fadeIn 0.6s ease-out;
             backdrop-filter: blur(8px);
+            position: relative;
+            z-index: 1;
         }
 
         @keyframes fadeIn {
@@ -65,7 +86,14 @@
             box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
         }
 
-        .language-buttons button:hover {
+        .language-buttons button.active {
+            background: linear-gradient(45deg, #4CAF50, #66BB6A);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .language-buttons button:hover:not(.active) {
             background: linear-gradient(45deg, #d0d0d0, #e5e5e5);
             transform: translateY(-3px);
             box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
@@ -157,16 +185,33 @@
             gap: 1.4rem;
         }
 
+        .bet-type {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
         .controls label {
             font-size: 1.2rem;
             color: #1a1a1a;
             font-weight: 500;
+            margin: 0 0.3rem;
         }
 
         input[type="radio"] {
             transform: scale(1.8);
-            margin: 0.7rem;
+            margin: 0.5rem;
             accent-color: #4CAF50;
+        }
+
+        .bet-inputs {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.8rem;
         }
 
         input[type="text"] {
@@ -176,7 +221,6 @@
             border: 2px solid #e0e0e0;
             border-radius: 0.7rem;
             text-align: center;
-            margin: 0.7rem;
             transition: border-color 0.3s ease;
             background: rgba(255, 255, 255, 0.9);
         }
@@ -187,7 +231,7 @@
             box-shadow: 0 0 8px rgba(76, 175, 80, 0.3);
         }
 
-        button {
+        button#btnStart {
             padding: 1rem 2.5rem;
             background: linear-gradient(45deg, #4CAF50, #66BB6A);
             color: white;
@@ -201,22 +245,22 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
 
-        button:hover {
+        button#btnStart:hover {
             transform: translateY(-3px);
             box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
         }
 
-        button:active {
+        button#btnStart:active {
             transform: translateY(0);
             background: linear-gradient(45deg, #45a049, #5cb860);
             box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
         }
 
         button:disabled {
-            background: #cccccc;
+            background: #cccccc !important;
             cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
+            transform: none !important;
+            box-shadow: none !important;
         }
 
         .result {
@@ -226,14 +270,22 @@
             padding: 0.9rem;
             border-radius: 0.7rem;
             min-height: 2.2rem;
+            text-align: center;
         }
 
         /* Mobile responsiveness */
         @media (max-width: 480px) {
+            body {
+                padding: 0.5rem;
+                align-items: flex-start;
+                padding-top: 1.5rem;
+            }
+
             .container {
-                margin: 0.5rem;
+                margin: 0;
                 padding: 1rem;
                 border-radius: 1.2rem;
+                width: 95%;
             }
 
             h1 {
@@ -292,13 +344,18 @@
             .dice-6 .dot-5 { top: 1.95rem; right: 0.9rem; }
             .dice-6 .dot-6 { bottom: 0.9rem; right: 0.9rem; }
 
+            .bet-type {
+                flex-direction: column;
+                gap: 0.3rem;
+            }
+
             input[type="text"] {
                 width: 6.5rem;
                 padding: 0.8rem;
                 font-size: 1.1rem;
             }
 
-            button {
+            button#btnStart {
                 padding: 0.8rem 2rem;
                 font-size: 1.1rem;
             }
@@ -311,14 +368,35 @@
                 transform: scale(1.6);
             }
         }
+        
+        @media (max-height: 700px) and (max-width: 480px) {
+            .dice-container {
+                height: 6rem;
+            }
+            
+            .dice {
+                width: 4rem;
+                height: 4rem;
+            }
+            
+            .controls {
+                margin: 1rem 0;
+                gap: 1rem;
+            }
+            
+            .result {
+                margin: 1rem 0;
+            }
+        }
     </style>
 </head>
 <body>
+    <div class="background-image"></div>
     <div class="container">
-        <h1>Joc de Zaruri</h1>
+        <h1 id="titleLabel">Joc de Zaruri</h1>
         
         <div class="language-buttons">
-            <button id="btnRomania">RO</button>
+            <button id="btnRomania" class="active">RO</button>
             <button id="btnEngleza">EN</button>
             <button id="btnPoloneza">PL</button>
         </div>
@@ -362,13 +440,13 @@
         </div>
         
         <div class="controls" id="controls">
-            <div>
+            <div class="bet-type">
                 <input type="radio" id="radioHigh" name="betType" checked>
                 <label for="radioHigh" id="labelHigh">Mai mare decât 3</label>
                 <input type="radio" id="radioLow" name="betType">
                 <label for="radioLow" id="labelLow">Mai mic sau egal cu 3</label>
             </div>
-            <div>
+            <div class="bet-inputs">
                 <input type="text" id="betAmount" placeholder="Sumă">
                 <button id="btnStart">Începe</button>
             </div>
@@ -395,6 +473,7 @@
         // Traduceri
         const translations = {
             RO: {
+                title: "Joc de Zaruri",
                 balance: "Balanță",
                 greater: "Mai mare decât 3",
                 lessOrEqual: "Mai mic sau egal cu 3",
@@ -403,9 +482,11 @@
                 lose: "Ai pierdut!",
                 invalidBet: "Pariu invalid!",
                 gameOver: "Ai rămas fără bani! Joc terminat.",
-                validAmount: "Introduceți o sumă validă!"
+                validAmount: "Introduceți o sumă validă!",
+                betAmount: "Sumă"
             },
             EN: {
+                title: "Dice Game",
                 balance: "Balance",
                 greater: "Greater than 3",
                 lessOrEqual: "Less than or equal to 3",
@@ -414,9 +495,11 @@
                 lose: "You lost!",
                 invalidBet: "Invalid bet!",
                 gameOver: "You're out of money! Game over.",
-                validAmount: "Enter a valid amount!"
+                validAmount: "Enter a valid amount!",
+                betAmount: "Amount"
             },
             PL: {
+                title: "Gra w Kości",
                 balance: "Saldo",
                 greater: "Większe niż 3",
                 lessOrEqual: "Mniejsze lub równe 3",
@@ -425,7 +508,8 @@
                 lose: "Przegrałeś!",
                 invalidBet: "Nieprawidłowy zakład!",
                 gameOver: "Koniec gry! Brak środków.",
-                validAmount: "Wprowadź prawidłową kwotę!"
+                validAmount: "Wprowadź prawidłową kwotę!",
+                betAmount: "Kwota"
             }
         };
         
@@ -435,6 +519,15 @@
             EN: "£",
             PL: "zł"
         };
+        
+        // Funcție pentru actualizarea stării butoanelor de limbă
+        function updateLanguageButtonsState(lang) {
+            document.getElementById('btnRomania').classList.remove('active');
+            document.getElementById('btnEngleza').classList.remove('active');
+            document.getElementById('btnPoloneza').classList.remove('active');
+            
+            document.getElementById(`btn${lang === "RO" ? "Romania" : lang === "EN" ? "Engleza" : "Poloneza"}`).classList.add('active');
+        }
         
         // Butoane limbă
         document.getElementById('btnRomania').addEventListener('click', () => setLanguage("RO"));
@@ -447,11 +540,16 @@
             currentCurrency = currencies[lang];
             
             // Actualizează interfața
+            document.getElementById('titleLabel').textContent = translations[lang].title;
             document.getElementById('balanceLabel').textContent = `${translations[lang].balance}: ${balance} ${currentCurrency}`;
             document.getElementById('labelHigh').textContent = translations[lang].greater;
             document.getElementById('labelLow').textContent = translations[lang].lessOrEqual;
             document.getElementById('btnStart').textContent = translations[lang].start;
+            document.getElementById('betAmount').placeholder = translations[lang].betAmount;
             document.getElementById('resultLabel').textContent = "";
+            
+            // Actualizează starea butoanelor de limbă
+            updateLanguageButtonsState(lang);
         }
         
         // Ascunde/Afișează zarurile
@@ -497,11 +595,15 @@
             document.getElementById('btnEngleza').disabled = true;
             document.getElementById('btnPoloneza').disabled = true;
             
-            // Simulare sunet de zaruri
-            const audio = new Audio('https://www.soundjay.com/misc/sounds/dice-roll-02.mp3');
-            audio.play().catch(error => {
-                console.log("Eroare la redarea sunetului:", error);
-            });
+            // Simulare sunet de zaruri (încercăm să redăm sunetul dacă este disponibil)
+            try {
+                const audio = new Audio('https://www.soundjay.com/misc/sounds/dice-roll-02.mp3');
+                audio.play().catch(error => {
+                    console.log("Eroare la redarea sunetului:", error);
+                });
+            } catch (error) {
+                console.log("Sunetul nu poate fi redat:", error);
+            }
             
             // Animație zaruri
             rollingInProgress = true;
@@ -569,6 +671,18 @@
         
         // Inițializare
         hideAllDice();
+        
+        // Adaptare pentru dispozitive mobile
+        function adjustForMobile() {
+            if (window.innerHeight < 700 && window.innerWidth < 480) {
+                document.querySelector('.container').style.padding = '0.8rem';
+                document.querySelector('.dice-container').style.height = '6rem';
+            }
+        }
+        
+        // Apelăm funcția la încărcare și redimensionare
+        window.addEventListener('load', adjustForMobile);
+        window.addEventListener('resize', adjustForMobile);
     </script>
 </body>
 </html>
