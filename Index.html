@@ -42,13 +42,13 @@
 
         .container {
             background-image: url(ewfgwergerewegtattttt46qe6.JPG);
+            background-repeat: no-repeat;
             background-size: 300% 300%;
             background-position: center;
-            background-repeat: no-repeat;
             width: 100%;
             max-width: 450px;
             margin: 0 auto;
-            padding: 1.5rem;a
+            padding: 1.5rem;
             background-image: url(ewfgwergerewegtattttt46qe6.JPG);
             border-radius: 1.5rem;
             box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
@@ -120,7 +120,7 @@
             background: rgba(255, 255, 255, 0.3);
             padding: 0.9rem;
             border-radius: 0.7rem;
-            box-shadow: 0 3 Formación: 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
             text-align: center;
             text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
         }
@@ -524,7 +524,7 @@
                 </div>
                 <div class="bet-option">
                     <input type="radio" id="radioLow" name="betType">
-                    <label for="radioLow" UId="labelLow">Mai mic sau egal cu 3</label>
+                    <label for="radioLow" id="labelLow">Mai mic sau egal cu 3</label>
                 </div>
                 <div class="bet-option">
                     <input type="radio" id="radioOdd" name="betType">
@@ -713,9 +713,9 @@
             document.getElementById('btnPoloneza').disabled = true;
             document.getElementById('btnSpaniola').disabled = true;
             
-            // Simulare sunet de zaruri
+            // Simulare sunet de zaruri (încercăm să redăm sunetul dacă este disponibil)
             try {
-                const audio = new Audio('dice-142528.wav');
+                const audio = new Audio("dice-142528.wav");
                 audio.play().catch(error => {
                     console.log("Eroare la redarea sunetului:", error);
                 });
