@@ -21,7 +21,7 @@
         }
 
         body {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            background: linear-gradient(135deg, #e6e9f0 0%, #d1d9e6 100%);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -42,6 +42,9 @@
 
         .container {
             background-image: url(ewfgwergerewegtattttt46qe6.JPG);
+            background-repeat: no-repeat;
+            background-size: 300% 300%;
+            background-position: center;
             width: 100%;
             max-width: 450px;
             margin: 0 auto;
@@ -50,7 +53,7 @@
             border-radius: 1.5rem;
             box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
             animation: fadeIn 0.6s ease-out;
-            backdrop-filter: blur(8px);
+            backdrop-filter: blur(10px);
             position: relative;
             z-index: 1;
         }
@@ -61,11 +64,12 @@
         }
 
         h1 {
-            font-size: 1.9rem;
+            font-size: 2rem;
             margin: 0.8rem 0;
             color: #1a1a1a;
             font-weight: 700;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
         }
 
         .language-buttons {
@@ -76,8 +80,9 @@
         }
 
         .language-buttons button {
-            padding: 0.7rem 1.4rem;
-            font-size: 1.1rem;
+            padding: 0.7rem;
+            width: 2.5rem;
+            height: 2.5rem;
             border: none;
             border-radius: 0.7rem;
             background: linear-gradient(45deg, #e0e0e0, #f5f5f5);
@@ -85,11 +90,13 @@
             transition: all 0.3s ease;
             touch-action: manipulation;
             box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .language-buttons button.active {
             background: linear-gradient(45deg, #4CAF50, #66BB6A);
-            color: white;
             transform: translateY(-2px);
             box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
         }
@@ -110,10 +117,12 @@
             margin: 1.4rem 0;
             font-weight: 600;
             color: #1a1a1a;
-            background: linear-gradient(45deg, #f0f4f8, #ffffff);
+            background: rgba(255, 255, 255, 0.3);
             padding: 0.9rem;
             border-radius: 0.7rem;
             box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
         }
 
         .dice-container {
@@ -187,23 +196,55 @@
         }
 
         .bet-type {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 0.5rem;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.8rem;
+            background: rgba(255, 255, 255, 0.3);
+            padding: 1.2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            justify-items: center;
         }
 
-        .controls label {
-            font-size: 1.2rem;
+        .bet-option {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.8rem 1.2rem;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 0.6rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            text-align: center;
+        }
+
+        .bet-option:hover {
+            background: rgba(255, 255, 255, 0.5);
+            transform: scale(1.05);
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .bet-option input[type="radio"]:checked + label {
+            color: #4CAF50;
+            font-weight: 700;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .bet-option label {
+            font-size: 1.15rem;
             color: #1a1a1a;
             font-weight: 500;
-            margin: 0 0.3rem;
+            margin-left: 0.6rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
         }
 
         input[type="radio"] {
-            transform: scale(1.8);
-            margin: 0.5rem;
+            transform: scale(1.6);
+            margin: 0;
             accent-color: #4CAF50;
         }
 
@@ -223,7 +264,7 @@
             border-radius: 0.7rem;
             text-align: center;
             transition: border-color 0.3s ease;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
         }
 
         input[type="text"]:focus {
@@ -272,6 +313,8 @@
             border-radius: 0.7rem;
             min-height: 2.2rem;
             text-align: center;
+            background: rgba(255, 255, 255, 0.3);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
         }
 
         /* Mobile responsiveness */
@@ -299,8 +342,9 @@
             }
 
             .language-buttons button {
-                padding: 0.6rem 1.2rem;
-                font-size: 0.95rem;
+                padding: 0.6rem;
+                width: 2rem;
+                height: 2rem;
             }
 
             .balance {
@@ -346,8 +390,17 @@
             .dice-6 .dot-6 { bottom: 0.9rem; right: 0.9rem; }
 
             .bet-type {
-                flex-direction: column;
-                gap: 0.3rem;
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+                padding: 0.8rem;
+            }
+
+            .bet-option {
+                padding: 0.6rem 1rem;
+            }
+
+            .bet-option label {
+                font-size: 1rem;
             }
 
             input[type="text"] {
@@ -361,12 +414,9 @@
                 font-size: 1.1rem;
             }
 
-            .controls label {
-                font-size: 1.1rem;
-            }
-
-            input[type="radio"] {
-                transform: scale(1.6);
+            .result {
+                font-size: 1.2rem;
+                padding: 0.7rem;
             }
         }
         
@@ -389,6 +439,31 @@
                 margin: 1rem 0;
             }
         }
+        /* Stiluri pentru steaguri */
+        .flag {
+            display: inline-block;
+            width: 1.5rem;
+            height: 1.5rem;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .flag-ro {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2'%3E%3Cpath fill='%23002B7F' d='M0 0h1v2H0z'/%3E%3Cpath fill='%23FCD116' d='M1 0h1v2H1z'/%3E%3Cpath fill='%23CE1126' d='M2 0h1v2H2z'/%3E%3C/svg%3E");
+        }
+
+        .flag-uk {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 30'%3E%3Crect width='60' height='30' fill='%23012169'/%3E%3Cpath d='M0,0 L60,30 M60,0 L0,30' stroke='%23fff' stroke-width='6'/%3E%3Cpath d='M0,0 L60,30 M60,0 L0,30' stroke='%23C8102E' stroke-width='4'/%3E%3Cpath d='M30,0 L30,30 M0,15 L60,15' stroke='%23fff' stroke-width='10'/%3E%3Cpath d='M30,0 L30,30 M0,15 L60,15' stroke='%23C8102E' stroke-width='6'/%3E%3C/svg%3E");
+        }
+
+        .flag-pl {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 10'%3E%3Crect width='16' height='5' fill='white'/%3E%3Crect width='16' height='5' y='5' fill='%23DC143C'/%3E%3C/svg%3E");
+        }
+
+        .flag-es {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2'%3E%3Cpath fill='%23C60B1E' d='M0 0h3v0.5H0zM0 1.5h3v0.5H0z'/%3E%3Cpath fill='%23FFC107' d='M0 0.5h3v1H0z'/%3E%3C/svg%3E");
+        }
     </style>
 </head>
 <body>
@@ -397,9 +472,10 @@
         <h1 id="titleLabel">Joc de Zaruri</h1>
         
         <div class="language-buttons">
-            <button id="btnRomania" class="active">RO</button>
-            <button id="btnEngleza">EN</button>
-            <button id="btnPoloneza">PL</button>
+            <button id="btnRomania" class="active"><span class="flag flag-ro"></span></button>
+            <button id="btnEngleza"><span class="flag flag-uk"></span></button>
+            <button id="btnPoloneza"><span class="flag flag-pl"></span></button>
+            <button id="btnSpaniola"><span class="flag flag-es"></span></button>
         </div>
         
         <div class="balance" id="balanceLabel">Balanță: 100 lei</div>
@@ -442,10 +518,22 @@
         
         <div class="controls" id="controls">
             <div class="bet-type">
-                <input type="radio" id="radioHigh" name="betType" checked>
-                <label for="radioHigh" id="labelHigh">Mai mare decât 3</label>
-                <input type="radio" id="radioLow" name="betType">
-                <label for="radioLow" id="labelLow">Mai mic sau egal cu 3</label>
+                <div class="bet-option">
+                    <input type="radio" id="radioHigh" name="betType" checked>
+                    <label for="radioHigh" id="labelHigh">Mai mare decât 3</label>
+                </div>
+                <div class="bet-option">
+                    <input type="radio" id="radioLow" name="betType">
+                    <label for="radioLow" id="labelLow">Mai mic sau egal cu 3</label>
+                </div>
+                <div class="bet-option">
+                    <input type="radio" id="radioOdd" name="betType">
+                    <label for="radioOdd" id="labelOdd">Numere impare</label>
+                </div>
+                <div class="bet-option">
+                    <input type="radio" id="radioEven" name="betType">
+                    <label for="radioEven" id="labelEven">Numere pare</label>
+                </div>
             </div>
             <div class="bet-inputs">
                 <input type="text" id="betAmount" placeholder="Sumă">
@@ -478,6 +566,8 @@
                 balance: "Balanță",
                 greater: "Mai mare decât 3",
                 lessOrEqual: "Mai mic sau egal cu 3",
+                odd: "Numere impare",
+                even: "Numere pare",
                 start: "Începe",
                 win: "Ai câștigat!",
                 lose: "Ai pierdut!",
@@ -491,6 +581,8 @@
                 balance: "Balance",
                 greater: "Greater than 3",
                 lessOrEqual: "Less than or equal to 3",
+                odd: "Odd numbers",
+                even: "Even numbers",
                 start: "Start",
                 win: "You won!",
                 lose: "You lost!",
@@ -504,6 +596,8 @@
                 balance: "Saldo",
                 greater: "Większe niż 3",
                 lessOrEqual: "Mniejsze lub równe 3",
+                odd: "Liczby nieparzyste",
+                even: "Liczby parzyste",
                 start: "Start",
                 win: "Wygrałeś!",
                 lose: "Przegrałeś!",
@@ -511,6 +605,21 @@
                 gameOver: "Koniec gry! Brak środków.",
                 validAmount: "Wprowadź prawidłową kwotę!",
                 betAmount: "Kwota"
+            },
+            ES: {
+                title: "Juego de Dados",
+                balance: "Saldo",
+                greater: "Mayor que 3",
+                lessOrEqual: "Menor o igual a 3",
+                odd: "Números impares",
+                even: "Números pares",
+                start: "Empezar",
+                win: "¡Has ganado!",
+                lose: "¡Has perdido!",
+                invalidBet: "¡Apuesta inválida!",
+                gameOver: "¡Te has quedado sin dinero! Juego terminado.",
+                validAmount: "¡Introduce una cantidad válida!",
+                betAmount: "Cantidad"
             }
         };
         
@@ -518,7 +627,8 @@
         const currencies = {
             RO: "lei",
             EN: "£",
-            PL: "zł"
+            PL: "zł",
+            ES: "€"
         };
         
         // Funcție pentru actualizarea stării butoanelor de limbă
@@ -526,14 +636,16 @@
             document.getElementById('btnRomania').classList.remove('active');
             document.getElementById('btnEngleza').classList.remove('active');
             document.getElementById('btnPoloneza').classList.remove('active');
+            document.getElementById('btnSpaniola').classList.remove('active');
             
-            document.getElementById(`btn${lang === "RO" ? "Romania" : lang === "EN" ? "Engleza" : "Poloneza"}`).classList.add('active');
+            document.getElementById(`btn${lang === "RO" ? "Romania" : lang === "EN" ? "Engleza" : lang === "PL" ? "Poloneza" : "Spaniola"}`).classList.add('active');
         }
         
         // Butoane limbă
         document.getElementById('btnRomania').addEventListener('click', () => setLanguage("RO"));
         document.getElementById('btnEngleza').addEventListener('click', () => setLanguage("EN"));
         document.getElementById('btnPoloneza').addEventListener('click', () => setLanguage("PL"));
+        document.getElementById('btnSpaniola').addEventListener('click', () => setLanguage("ES"));
         
         // Setare limbă
         function setLanguage(lang) {
@@ -545,6 +657,8 @@
             document.getElementById('balanceLabel').textContent = `${translations[lang].balance}: ${balance} ${currentCurrency}`;
             document.getElementById('labelHigh').textContent = translations[lang].greater;
             document.getElementById('labelLow').textContent = translations[lang].lessOrEqual;
+            document.getElementById('labelOdd').textContent = translations[lang].odd;
+            document.getElementById('labelEven').textContent = translations[lang].even;
             document.getElementById('btnStart').textContent = translations[lang].start;
             document.getElementById('betAmount').placeholder = translations[lang].betAmount;
             document.getElementById('resultLabel').textContent = "";
@@ -592,9 +706,12 @@
             document.getElementById('betAmount').disabled = true;
             document.getElementById('radioHigh').disabled = true;
             document.getElementById('radioLow').disabled = true;
+            document.getElementById('radioOdd').disabled = true;
+            document.getElementById('radioEven').disabled = true;
             document.getElementById('btnRomania').disabled = true;
             document.getElementById('btnEngleza').disabled = true;
             document.getElementById('btnPoloneza').disabled = true;
+            document.getElementById('btnSpaniola').disabled = true;
             
             // Simulare sunet de zaruri (încercăm să redăm sunetul dacă este disponibil)
             try {
@@ -627,9 +744,12 @@
                         document.getElementById('betAmount').disabled = false;
                         document.getElementById('radioHigh').disabled = false;
                         document.getElementById('radioLow').disabled = false;
+                        document.getElementById('radioOdd').disabled = false;
+                        document.getElementById('radioEven').disabled = false;
                         document.getElementById('btnRomania').disabled = false;
                         document.getElementById('btnEngleza').disabled = false;
                         document.getElementById('btnPoloneza').disabled = false;
+                        document.getElementById('btnSpaniola').disabled = false;
                     }, 500);
                 }
             }, 100);
@@ -638,26 +758,33 @@
         // Verificare rezultat
         function checkResult(rolledValue, bet) {
             const radioHigh = document.getElementById('radioHigh');
+            const radioLow = document.getElementById('radioLow');
+            const radioOdd = document.getElementById('radioOdd');
             const resultLabel = document.getElementById('resultLabel');
             
             let winCondition = false;
+            let winAmount = bet;
             
             if (radioHigh.checked && rolledValue > 3) {
                 winCondition = true;
-            } else if (!radioHigh.checked && rolledValue <= 3) {
+            } else if (radioLow.checked && rolledValue <= 3) {
+                winCondition = true;
+            } else if (radioOdd.checked && rolledValue % 2 !== 0) {
+                winCondition = true;
+            } else if (!radioHigh.checked && !radioLow.checked && !radioOdd.checked && rolledValue % 2 === 0) {
                 winCondition = true;
             }
             
             if (winCondition) {
-                balance += bet;
-                resultLabel.textContent = `${translations[currentLanguage].win} +${bet} ${currentCurrency}`;
+                balance += winAmount;
+                resultLabel.textContent = `${translations[currentLanguage].win} +${winAmount} ${currentCurrency}`;
                 resultLabel.style.color = '#2ecc71';
-                resultLabel.style.background = 'rgba(46, 204, 113, 0.1)';
+                resultLabel.style.background = 'rgba(46, 204, 113, 0.3)';
             } else {
                 balance -= bet;
                 resultLabel.textContent = `${translations[currentLanguage].lose} -${bet} ${currentCurrency}`;
                 resultLabel.style.color = '#e74c3c';
-                resultLabel.style.background = 'rgba(231, 76, 60, 0.1)';
+                resultLabel.style.background = 'rgba(231, 76, 60, 0.3)';
             }
             
             // Actualizare balanță
